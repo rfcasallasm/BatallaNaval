@@ -6,8 +6,8 @@
 package co.edu.udistrital.batallanaval.modelo;
 
 import co.edu.udistrital.batallanaval.presentacion.controlador.PlayerController;
+import co.edu.udistrital.batallanaval.presentacion.vista.Sonidos;
 import java.awt.Point;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -45,6 +45,7 @@ public class Partida implements Runnable{
     public void run() {        
         Point ataque = null;
         boolean result = false;
+        Sonidos sonidos = Sonidos.getInstance();
         while(!isFinalizada()){
             try {
                 this.appendToLog( (turno == 0 ? "Tu turno" : "Turno del oponente")+", esperando ataque..." );
@@ -59,6 +60,7 @@ public class Partida implements Runnable{
                         this.appendToLog( "Aplicando "+(turno == 0 ? "tu ataque" : "el ataque del oponente") );
                         result = this.jugadores[i].putAtaque(ataque);
                         this.appendToLog( (turno == 0 ? "Tu ataque" : "El ataque del oponente")+" resulto en: "+(result ? "¡ ¡ ¡ I M P A C T O ! ! !" : "nada") );
+                        sonidos.playSound(result?"hit":"water");
                         this.jugadores[turno].setResult(ataque, result);
                     }
                 }
@@ -67,7 +69,9 @@ public class Partida implements Runnable{
             }
             //Cambio de turno
             turno = result ? turno : (turno < (this.jugadores.length-1) ? (turno+1) : 0);
-        }
+        }        
+        sonidos.playSound(this.jugadores[0].getTablero().isDerrotado()?"loser":"winner");
+        this.appendToLog(this.jugadores[0].getTablero().isDerrotado()?"Has sido derrotado!":"Has ganado, yeeepiii");
     }
 
     public int getTurno() {

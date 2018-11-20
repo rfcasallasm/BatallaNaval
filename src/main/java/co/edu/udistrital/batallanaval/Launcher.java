@@ -6,7 +6,6 @@
 package co.edu.udistrital.batallanaval;
 
 import co.edu.udistrital.batallanaval.presentacion.modelo.Modelo;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**

@@ -12,6 +12,7 @@ import co.edu.udistrital.batallanaval.modelo.Tablero;
 import co.edu.udistrital.batallanaval.presentacion.controlador.PlayerController;
 import co.edu.udistrital.batallanaval.presentacion.controlador.SocketPlayerController;
 import co.edu.udistrital.batallanaval.presentacion.controlador.TableroPlayerController;
+import co.edu.udistrital.batallanaval.presentacion.vista.Sonidos;
 import co.edu.udistrital.batallanaval.presentacion.vista.VerTableroPanel;
 import co.edu.udistrital.batallanaval.presentacion.vista.Vista;
 import java.awt.CardLayout;
@@ -46,6 +47,10 @@ public class Modelo {
         this.logger.info("cambiando visibilidad de la vista");
         this.vista.setVisible(true);
         this.showCard("editar");
+        Sonidos.getInstance().playSound("loser");
+        Sonidos.getInstance().playSound("water");
+        Sonidos.getInstance().playSound("winner");
+        Sonidos.getInstance().playSound("hit");
     }
     
     public void crearPartida(boolean ataque, Socket socket){

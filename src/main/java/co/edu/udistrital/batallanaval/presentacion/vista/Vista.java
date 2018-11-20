@@ -72,6 +72,7 @@ public class Vista extends javax.swing.JFrame implements PartidaLogger{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Batalla Naval");
         setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanelConexion.setBorder(javax.swing.BorderFactory.createTitledBorder("Conexion"));
 
