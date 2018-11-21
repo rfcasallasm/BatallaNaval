@@ -38,6 +38,10 @@ public class Sonidos {
     private Sonidos(){
         super();
         this.sounds = new HashMap<>();        
+        this.sounds.put("hit", "/sounds/hit.wav");
+        this.sounds.put("loser", "/sounds/loser.wav");
+        this.sounds.put("water", "/sounds/water.wav");
+        this.sounds.put("winner", "/sounds/winner.wav");
     }
     
     

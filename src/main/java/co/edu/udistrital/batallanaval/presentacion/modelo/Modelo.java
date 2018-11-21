@@ -40,17 +40,13 @@ public class Modelo {
         super();
         this.tableroFactory = new Tablero9NavesFactory();
         this.tablero = this.tableroFactory.createTablero();
-        this.vista = new Vista(this);        
+        this.vista = new Vista(this);             
     }
     
     public void inicializar(){    
         this.logger.info("cambiando visibilidad de la vista");
         this.vista.setVisible(true);
         this.showCard("editar");
-        Sonidos.getInstance().playSound("loser");
-        Sonidos.getInstance().playSound("water");
-        Sonidos.getInstance().playSound("winner");
-        Sonidos.getInstance().playSound("hit");
     }
     
     public void crearPartida(boolean ataque, Socket socket){
