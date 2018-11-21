@@ -63,7 +63,9 @@ public class Vista extends javax.swing.JFrame implements PartidaLogger{
         jPanelPartida = new javax.swing.JPanel();
         jPanelDefensa = new VerTableroPanel();
         jPanelAtaque = new VerTableroPanel();
-        jPanelEditar = new EditarTableroPanel(this.modelo.getTablero());
+        jPanelEditar = new javax.swing.JPanel();
+        jPanelTableroEditable = new EditarTableroPanel(this.modelo.getTablero());
+        jPanelNaves = new VerNavesPanel(this.modelo.getTablero());
         jPanelLog = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaLog = new javax.swing.JTextArea();
@@ -127,6 +129,10 @@ public class Vista extends javax.swing.JFrame implements PartidaLogger{
         jPanelEditar.setMaximumSize(new java.awt.Dimension(2560, 2560));
         jPanelEditar.setMinimumSize(new java.awt.Dimension(380, 380));
         jPanelEditar.setPreferredSize(new java.awt.Dimension(380, 380));
+        jPanelEditar.setLayout(new java.awt.GridLayout(1, 2, 10, 10));
+        jPanelEditar.add(jPanelTableroEditable);
+        jPanelEditar.add(jPanelNaves);
+
         jPanelGame.add(jPanelEditar, "editar");
 
         getContentPane().add(jPanelGame, java.awt.BorderLayout.CENTER);
@@ -186,7 +192,9 @@ public class Vista extends javax.swing.JFrame implements PartidaLogger{
     private javax.swing.JPanel jPanelEditar;
     private javax.swing.JPanel jPanelGame;
     private javax.swing.JPanel jPanelLog;
+    private javax.swing.JPanel jPanelNaves;
     private javax.swing.JPanel jPanelPartida;
+    private javax.swing.JPanel jPanelTableroEditable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaLog;
     private javax.swing.JFormattedTextField jTextFieldIp;

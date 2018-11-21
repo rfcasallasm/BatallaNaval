@@ -86,7 +86,7 @@ public class EditarTableroController implements MouseListener{
                 naveEnPunto.setPosicion(null);                
             }
         }
-        this.vista.repaint();
+        this.vista.getParent().repaint();
     }
 
     @Override

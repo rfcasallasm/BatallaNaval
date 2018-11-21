@@ -6,6 +6,7 @@
 package co.edu.udistrital.batallanaval;
 
 import co.edu.udistrital.batallanaval.presentacion.modelo.Modelo;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -19,7 +20,7 @@ public class Launcher {
     }
     
     public static void main(String args[]) throws UnknownHostException{
-        //System.out.println(InetAddress.getLocalHost().getHostAddress());        
+        //System.out.println(InetAddress.getLocalHost().getHostAddress());          
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$-7s] %3$s => %5$s %n");
         Modelo modelo = new Modelo();
         modelo.inicializar();
