@@ -45,6 +45,25 @@ public class Tablero{
         return ataques;
     }
     
+    public boolean isValido(){
+        boolean valido = true;
+        for( Nave nave : this.naves ){
+            valido &= (nave.getPosicion() != null);
+        }        
+        if(valido){
+            Point posIni, posFin;
+            for( int i = 0; (i < this.naves.length && valido); i++ ){
+                posIni = this.naves[i].getPosicion();
+                posFin = this.naves[i].getPosicionFinal();                
+                valido &= posIni.x >= 0 && posFin.x < this.width;
+                valido &= posIni.y >= 0 && posFin.y < this.height;                
+                for( int j = (i+1); (j < this.naves.length && valido); j++){
+                    valido &= !this.naves[i].isOverlap(this.naves[j]);
+                }
+            }
+        }
+        return valido;
+    }
     
     public boolean isDerrotado(){
         int impactos = 0;

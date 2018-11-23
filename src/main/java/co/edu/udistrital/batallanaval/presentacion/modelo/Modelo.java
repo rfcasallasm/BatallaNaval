@@ -12,12 +12,14 @@ import co.edu.udistrital.batallanaval.modelo.Tablero;
 import co.edu.udistrital.batallanaval.presentacion.controlador.PlayerController;
 import co.edu.udistrital.batallanaval.presentacion.controlador.SocketPlayerController;
 import co.edu.udistrital.batallanaval.presentacion.controlador.TableroPlayerController;
-import co.edu.udistrital.batallanaval.presentacion.vista.Sonidos;
+import co.edu.udistrital.batallanaval.presentacion.vista.EditarTableroPanel;
 import co.edu.udistrital.batallanaval.presentacion.vista.VerTableroPanel;
 import co.edu.udistrital.batallanaval.presentacion.vista.Vista;
 import java.awt.CardLayout;
 import java.net.Socket;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -36,8 +38,11 @@ public class Modelo {
     
     private Partida partida;
     
-    public Modelo(){
+    private String localhost;
+    
+    public Modelo(String localhost){
         super();
+        this.localhost = localhost;
         this.tableroFactory = new Tablero9NavesFactory();
         this.tablero = this.tableroFactory.createTablero();
         this.vista = new Vista(this);             
@@ -72,6 +77,17 @@ public class Modelo {
                 ataque ? 0 : 1
             );        
         this.showCard("partida");
+        while( !partida.isFinalizada() ){
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                this.logger.log(Level.SEVERE, null, ex);
+            }
+        }
+        JOptionPane.showMessageDialog(this.vista, this.tablero.isDerrotado()?"Has perdido":"Ganaste!");
+        this.showCard("editar");
+        this.vista.getjToggleButtonConexion().setSelected(false);        
+        ((EditarTableroPanel)this.vista.getjPanelTableroEditable()).setEditable(true);
     }
 
     private void showCard(String cardName){
@@ -91,5 +107,9 @@ public class Modelo {
     public Partida getPartida(){
         return this.partida;
     }
+
+    public String getLocalhost() {
+        return localhost;
+    }   
     
 }

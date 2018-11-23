@@ -56,12 +56,31 @@ public class Nave {
         );
     }    
 
-    public void paint(){
-        
+    public boolean isOverlap(Nave nave){
+        boolean overlap = false;
+        if( this.posicion != null ){
+            for( int i = 0; i < this.longitud; i++ ){
+                overlap |= nave.isPointInside( 
+                    new Point( 
+                        this.posicion.x + (!this.horizontal?0:i), 
+                        this.posicion.y + ( this.horizontal?0:i)
+                    ) 
+                );
+            }
+        }
+        return overlap;
     }
+    
+    public Point getPosicionFinal(){
+        return new Point( 
+            this.posicion.x + (!this.horizontal?0:this.longitud), 
+            this.posicion.y + ( this.horizontal?0:this.longitud)
+        );
+    }
+    
     
     @Override
     public String toString(){
-        return this.nombre + ( this.posicion != null ? "["+this.posicion.x+", "+this.posicion.y+"] - ["+(this.posicion.x+(!this.horizontal?1:this.longitud)-1)+", "+(this.posicion.y+(this.horizontal?1:this.longitud)-1)+"]" : "" );
+        return this.nombre + ( this.posicion != null ? "["+this.posicion.x+", "+this.posicion.y+"] - ["+this.getPosicionFinal().x+", "+this.getPosicionFinal().y+"]" : "" );
     }
 }

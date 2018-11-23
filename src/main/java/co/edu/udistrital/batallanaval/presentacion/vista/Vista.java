@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.DefaultFormatterFactory;
 
@@ -245,5 +246,13 @@ public class Vista extends javax.swing.JFrame implements PartidaLogger{
     public JPanel getjPanelEditar() {
         return jPanelEditar;
     }     
+    
+    public JPanel getjPanelTableroEditable(){
+        return jPanelTableroEditable;
+    }
+    
+    public JToggleButton getjToggleButtonConexion(){
+        return jToggleButtonConexion;
+    }
     
 }
