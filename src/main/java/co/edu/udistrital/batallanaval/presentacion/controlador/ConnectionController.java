@@ -41,14 +41,15 @@ public class ConnectionController implements ActionListener, Runnable {
                 if(!this.vista.getModelo().getTablero().isValido()){
                     message = "Debes corregir los errores en el tablero antes de establecer una conexión";
                 }
-                if( this.vista.getjTextFieldIp().getValue() == null ){
+                else if( this.vista.getjTextFieldIp().getValue() == null ){
                     message = "uuupps! ¿y la ip?";
                 }
-                if( this.vista.getjTextFieldPort().getValue() == null ){
+                else if( this.vista.getjTextFieldPort().getValue() == null ){
                     message = "uuupps! ¿y el puerto?";
                 }
                 if(message == null){                    
                     this.comando = e.getActionCommand();
+                    ((EditarTableroPanel)this.vista.getjPanelTableroEditable()).setEditable(false);
                     Thread thread = new Thread(this);
                     thread.start();
                 }

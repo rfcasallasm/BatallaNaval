@@ -8,6 +8,7 @@ package co.edu.udistrital.batallanaval.presentacion.vista;
 import co.edu.udistrital.batallanaval.modelo.Nave;
 import co.edu.udistrital.batallanaval.modelo.Tablero;
 import co.edu.udistrital.batallanaval.presentacion.controlador.EditarTableroController;
+import co.edu.udistrital.batallanaval.utiles.Imagenes;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -46,28 +47,22 @@ public class EditarTableroPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //int size   = Math.min( this.getWidth(), this.getHeight() );
-        //int border = (int)(Math.min( 10d, size*0.1d )/2);
         
-        g.setColor( this.editable ? Color.decode("#9a5949") : Color.decode("#49599a") );
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
         Point factor = new Point(
             (this.getWidth()/this.tablero.getWidth()),
             (this.getHeight()/this.tablero.getHeight())    
         );
-
-        g.setColor(Color.WHITE);
         
+        
+        g.setColor( this.editable ? Color.decode("#9a5949") : Color.decode("#49599a") );
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        g.setColor(Color.WHITE);
         for( int i = 1; i < this.tablero.getWidth(); i++ ){            
             g.drawLine( i*factor.x, 0, i*factor.x, this.getHeight());
         }
-        
         for( int j = 1; j < this.tablero.getHeight(); j++ ){
             g.drawLine( 0, j*factor.y, this.getWidth(), j*factor.y );
         }
-                
-        
-        
         
         //Graphics2D g2d = (Graphics2D) g;
         Paint paint;
@@ -76,9 +71,22 @@ public class EditarTableroPanel extends JPanel{
         int x, y, width, height;
         //
         int border = (int)(Math.min( 10d, 0.3d*Math.max(factor.x, factor.y) )/2);
+        /*
         g.setColor( !this.editable ? Color.decode("#feb6aa") : Color.decode("#aab6fe") );
         ((Graphics2D)g).setStroke( new BasicStroke(0.5f*border));
+        */
         
+        for( Nave nave : this.tablero.getNaves() ){
+            if(nave.getPosicion() != null){
+                x = border + factor.x*nave.getPosicion().x;
+                y = border + factor.y*nave.getPosicion().y;
+                width  = -2*border + factor.x*(!nave.isHorizontal()?1:nave.getLongitud());
+                height = -2*border + factor.y*( nave.isHorizontal()?1:nave.getLongitud());                
+                g.drawImage(Imagenes.getInstance().getImage(nave.getNombre()+"_"+(nave.isHorizontal() ? "h" : "v")), x, y, width, height, this);                
+            }            
+        }
+        
+        /*
         for( Nave nave : this.tablero.getNaves() ){
             if(nave.getPosicion() != null){  
                 x = border + factor.x*nave.getPosicion().x;
@@ -103,7 +111,7 @@ public class EditarTableroPanel extends JPanel{
                 g.fillRoundRect(x, y, width, height, factor.x, factor.y);
                 ((Graphics2D)g).setPaint(paint);  
             }
-        }
+        }*/
         
     }
 

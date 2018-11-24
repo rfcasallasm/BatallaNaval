@@ -8,6 +8,7 @@ package co.edu.udistrital.batallanaval.modelo;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +16,8 @@ import java.util.Map;
  */
 public class Tablero{
             
+    private Logger logger = Logger.getLogger("Tablero");
+    
     private int width;
     private int height;    
     private Nave[] naves;
@@ -45,10 +48,13 @@ public class Tablero{
         return ataques;
     }
     
-    public boolean isValido(){
+    public boolean isValido(){        
         boolean valido = true;
         for( Nave nave : this.naves ){
             valido &= (nave.getPosicion() != null);
+            if(!valido){
+                this.logger.info("El tablero no es valido porque la nave "+nave+" no esta ubicada");
+            }
         }        
         if(valido){
             Point posIni, posFin;
@@ -57,11 +63,18 @@ public class Tablero{
                 posFin = this.naves[i].getPosicionFinal();                
                 valido &= posIni.x >= 0 && posFin.x < this.width;
                 valido &= posIni.y >= 0 && posFin.y < this.height;                
+                if(!valido){
+                    this.logger.info("El tablero no es valido porque la nave "+this.naves[i]+" esta fuera de rango");
+                }
                 for( int j = (i+1); (j < this.naves.length && valido); j++){
                     valido &= !this.naves[i].isOverlap(this.naves[j]);
+                    if(!valido){
+                        this.logger.info("El tablero no es valido porque la nave "+this.naves[i]+" se cruza con la nave "+this.naves[j]);
+                    }
                 }
             }
         }
+        this.logger.info("isValido(): "+valido);
         return valido;
     }
     

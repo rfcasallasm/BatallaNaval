@@ -6,7 +6,7 @@
 package co.edu.udistrital.batallanaval.modelo;
 
 import co.edu.udistrital.batallanaval.presentacion.controlador.PlayerController;
-import co.edu.udistrital.batallanaval.presentacion.vista.Sonidos;
+import co.edu.udistrital.batallanaval.utiles.Sonidos;
 import java.awt.Point;
 import java.util.logging.Logger;
 

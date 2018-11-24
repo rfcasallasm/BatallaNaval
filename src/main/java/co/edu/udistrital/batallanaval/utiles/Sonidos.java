@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.udistrital.batallanaval.presentacion.vista;
+package co.edu.udistrital.batallanaval.utiles;
 
 import java.io.InputStream;
 import java.util.HashMap;

@@ -73,8 +73,8 @@ public class Nave {
     
     public Point getPosicionFinal(){
         return new Point( 
-            this.posicion.x + (!this.horizontal?0:this.longitud), 
-            this.posicion.y + ( this.horizontal?0:this.longitud)
+            this.posicion.x + (!this.horizontal?0:this.longitud-1), 
+            this.posicion.y + ( this.horizontal?0:this.longitud-1)
         );
     }
     

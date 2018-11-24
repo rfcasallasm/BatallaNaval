@@ -7,6 +7,7 @@ package co.edu.udistrital.batallanaval.presentacion.vista;
 
 import co.edu.udistrital.batallanaval.modelo.Nave;
 import co.edu.udistrital.batallanaval.modelo.Tablero;
+import co.edu.udistrital.batallanaval.utiles.Imagenes;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -67,6 +68,17 @@ public class VerTableroPanel extends JPanel{
         ((Graphics2D)g).setStroke( new BasicStroke(0.5f*border));
         
         for( Nave nave : this.tablero.getNaves() ){
+            if(nave.getPosicion() != null){
+                x = border + factor.x*nave.getPosicion().x;
+                y = border + factor.y*nave.getPosicion().y;
+                width = -2*border + factor.x*(!nave.isHorizontal()?1:nave.getLongitud());
+                height = -2*border + factor.y*(nave.isHorizontal()?1:nave.getLongitud());
+                g.drawImage(Imagenes.getInstance().getImage(nave.getNombre()+"_"+(nave.isHorizontal() ? "h" : "v")), x, y, width, height, null);
+            }
+        }
+        
+        /*
+        for( Nave nave : this.tablero.getNaves() ){
             if(nave.getPosicion() != null){  
                 x = border + factor.x*nave.getPosicion().x;
                 y = border + factor.y*nave.getPosicion().y;
@@ -90,7 +102,7 @@ public class VerTableroPanel extends JPanel{
                 g.fillRoundRect(x, y, width, height, factor.x, factor.y);
                 ((Graphics2D)g).setPaint(paint);  
             }
-        }
+        }*/
         int x1, y1, x2, y2;
         for( Entry<Point, Boolean> ataque : this.tablero.getAtaques().entrySet() ){            
             g.setColor(Boolean.TRUE.equals( ataque.getValue() ) ? Color.RED : (!this.tablero.isDerrotado() && modoAtaque ? Color.BLUE : Color.WHITE) );
